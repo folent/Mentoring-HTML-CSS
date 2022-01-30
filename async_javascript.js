@@ -18,17 +18,13 @@ class ReversePromise {
     }
 
     then(callback) {
-        this.stack.push(callback);
+        this.stack.unshift(callback);
         return this;
     }
 
-    myReverse() {
-        while (this.stack.length) {
-            new Promise((resolve) => {
-                resolve();
-            }).then(this.stack.pop())
-        }
-        return this;
+    reverse() {
+        return this.stack
+            .reduce((prev, current) => prev.then(current), new Promise(resolve => resolve()));
     }
 }
 
@@ -51,5 +47,5 @@ let reversePromise = new ReversePromise((resolve) => {
     .then(() => console.log(2))
     .then(() => console.log(3))
     .then(() => console.log(4))
-    .myReverse()
+    .reverse()
 //1, 4,	3,	2
