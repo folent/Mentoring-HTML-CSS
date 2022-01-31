@@ -29,7 +29,12 @@ var Second = /** @class */ (function (_super) {
     Second.prototype.printName = function () {
         console.log('My name is ' + this.name);
     };
+    Second.prototype.setName = function (name) {
+        this.name = name.toString();
+    };
     return Second;
 }(First));
 var c = new Second('Kate');
+c.printName();
+c.setName('aaa');
 c.printName();

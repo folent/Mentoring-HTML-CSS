@@ -19,7 +19,14 @@ class Second extends First implements IPrintName{
   printName(): void {
     console.log('My name is ' + this.name);
   }
+
+  setName<T>(name: T): void {
+    this.name = name.toString();
+  }
+
 }
 
 const c = new Second('Kate');
+c.printName();
+c.setName('aaa');
 c.printName();
