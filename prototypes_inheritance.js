@@ -1,8 +1,7 @@
-function myNew(constructor, ...args) {
+function myNew(instance, ...args) {
     const obj = {};
-    obj.__proto__ = constructor.prototype;
-    obj.name = args[0];
-    obj.age = args[1];
+    obj.__proto__ = instance.prototype;
+    instance.call(obj, ...args);
     return obj;
 }
 
