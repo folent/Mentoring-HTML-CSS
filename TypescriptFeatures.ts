@@ -1,16 +1,24 @@
-interface IPrintName {
-  age: string,
-  printName(): void,
-
+interface IData<T> {
+  age: T,
+  name: string,
+  printName: PrintNameType,
+  setName: SetNameType
 }
+
+type SetNameType = (name: string) => any
+type PrintNameType = () => any
+
+
 abstract class First {
   protected constructor(public name: string) {}
 
-  abstract printName(): void ;
+  abstract printName(): void;
+  abstract setName(name: string): void
 }
 
-class Second extends First implements IPrintName{
+class Second extends First implements IData<string>{
   public age: string;
+  public name: string;
   constructor(name) {
     super(name);
     this.name = name;
@@ -20,10 +28,9 @@ class Second extends First implements IPrintName{
     console.log('My name is ' + this.name);
   }
 
-  setName<T>(name: T): void {
+  setName(name: string):void {
     this.name = name.toString();
   }
-
 }
 
 const c = new Second('Kate');
